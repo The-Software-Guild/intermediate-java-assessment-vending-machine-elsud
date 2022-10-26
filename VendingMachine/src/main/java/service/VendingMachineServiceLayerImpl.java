@@ -56,6 +56,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
                 return change.getChange(remainder);
         }
         // funds is equal to the price
+        dao.decrementItemNumber(name);
         return change.getEmptyChange();
     }
 

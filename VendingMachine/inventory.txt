@@ -1,0 +1,4 @@
+milkshake::6.70::12
+tea::4.35::12
+black coffee::5.10::0
+latte::7.50::2
