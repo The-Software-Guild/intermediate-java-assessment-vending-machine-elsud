@@ -1,17 +1,12 @@
 package vending.service;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import vending.controller.VendingMachineController;
 import vending.dao.VendingMachineAuditDao;
 import vending.dao.VendingMachineItemDao;
 import vending.dao.VendingMachinePersistenceException;
 import vending.dto.Coins;
 import vending.dto.Item;
 import org.junit.jupiter.api.Test;
-import vending.service.InsufficientFundsException;
-import vending.service.NoItemInventoryException;
-import vending.service.VendingMachineServiceLayer;
-import vending.service.VendingMachineServiceLayerImpl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,7 +30,11 @@ public class VendingMachineServiceLayerImplTest {
         testAudit = appContext.getBean(
                 "vendingMachineAuditDaoStubImpl", VendingMachineAuditDaoStubImpl.class
         );
-        service = new VendingMachineServiceLayerImpl(testDao, testAudit);
+        //service = new VendingMachineServiceLayerImpl(testDao, testAudit);
+        appContext.register(VendingMachineServiceLayerImpl.class);
+        service = appContext.getBean(
+                "vendingMachineServiceLayerImpl", VendingMachineServiceLayerImpl.class
+        );
     }
 
     private final String FIRST_NAME = "first";
