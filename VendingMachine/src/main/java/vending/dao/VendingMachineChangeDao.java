@@ -1,6 +1,6 @@
-package dao;
+package vending.dao;
 
-import dto.Coins;
+import vending.dto.Coins;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

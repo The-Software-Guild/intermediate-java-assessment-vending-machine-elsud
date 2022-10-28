@@ -1,8 +1,10 @@
-package service;
+package vending.service;
 
-import dao.VendingMachineAuditDao;
-import dao.VendingMachinePersistenceException;
+import org.springframework.stereotype.Component;
+import vending.dao.VendingMachineAuditDao;
+import vending.dao.VendingMachinePersistenceException;
 
+@Component
 public class VendingMachineAuditDaoStubImpl implements VendingMachineAuditDao {
     @Override
     public void writeAuditEntry(String entry) throws VendingMachinePersistenceException {

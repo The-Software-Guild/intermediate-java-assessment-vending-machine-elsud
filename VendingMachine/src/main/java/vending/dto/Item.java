@@ -1,4 +1,4 @@
-package dto;
+package vending.dto;
 
 import java.math.BigDecimal;
 

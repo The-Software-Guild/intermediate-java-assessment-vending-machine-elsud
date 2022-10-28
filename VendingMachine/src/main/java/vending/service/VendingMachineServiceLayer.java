@@ -1,8 +1,8 @@
-package service;
+package vending.service;
 
-import dao.VendingMachinePersistenceException;
-import dto.Coins;
-import dto.Item;
+import vending.dao.VendingMachinePersistenceException;
+import vending.dto.Coins;
+import vending.dto.Item;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,8 +1,7 @@
-package dao;
+package vending.dao;
 
-import dto.Item;
+import vending.dto.Item;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface VendingMachineItemDao {

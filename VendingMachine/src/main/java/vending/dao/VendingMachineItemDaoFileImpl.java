@@ -1,10 +1,12 @@
-package dao;
+package vending.dao;
 
-import dto.Item;
+import vending.dto.Item;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.*;
 
+@Component
 public class VendingMachineItemDaoFileImpl implements VendingMachineItemDao {
 
     // Map for storing inventory items

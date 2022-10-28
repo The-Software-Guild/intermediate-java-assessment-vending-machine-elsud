@@ -1,4 +1,4 @@
-package dao;
+package vending.dao;
 
 public class VendingMachinePersistenceException extends Exception {
 

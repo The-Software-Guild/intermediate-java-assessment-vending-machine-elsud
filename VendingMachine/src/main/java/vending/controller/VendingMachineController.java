@@ -1,22 +1,27 @@
-package controller;
+package vending.controller;
 
-import dao.VendingMachinePersistenceException;
-import dto.Coins;
-import dto.Item;
-import service.InsufficientFundsException;
-import service.NoItemInventoryException;
-import service.VendingMachineServiceLayer;
-import ui.VendingMachineView;
+import vending.dao.VendingMachinePersistenceException;
+import vending.dto.Coins;
+import vending.dto.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import vending.service.InsufficientFundsException;
+import vending.service.NoItemInventoryException;
+import vending.service.VendingMachineServiceLayer;
+import vending.ui.VendingMachineView;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class VendingMachineController {
 
     private final VendingMachineServiceLayer service;
+
     private final VendingMachineView view;
 
+    @Autowired
     public VendingMachineController(VendingMachineServiceLayer service, VendingMachineView view) {
         this.service = service;
         this.view = view;

@@ -1,6 +1,7 @@
-package dao;
+package vending.dao;
 
-import dto.Coins;
+import vending.dao.VendingMachineChangeDao;
+import vending.dto.Coins;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

@@ -1,8 +1,9 @@
-package service;
+package vending.service;
 
-import dao.VendingMachineItemDao;
-import dao.VendingMachinePersistenceException;
-import dto.Item;
+import org.springframework.stereotype.Component;
+import vending.dao.VendingMachineItemDao;
+import vending.dao.VendingMachinePersistenceException;
+import vending.dto.Item;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class VendingMachineItemDaoStubImpl implements VendingMachineItemDao {
 
     private Map<String, Item> inventoryItems = new HashMap<>();
@@ -25,7 +27,6 @@ public class VendingMachineItemDaoStubImpl implements VendingMachineItemDao {
         inventoryItems.put(FIRST_NAME, new Item(FIRST_NAME, FIRST_PRICE, FIRST_NUMBER));
         inventoryItems.put(SECOND_NAME, new Item(SECOND_NAME, SECOND_PRICE, SECOND_NUMBER));
     }
-
 
     @Override
     public Item getItem(String name) {

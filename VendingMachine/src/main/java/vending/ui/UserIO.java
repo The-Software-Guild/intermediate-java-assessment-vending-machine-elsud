@@ -1,4 +1,4 @@
-package ui;
+package vending.ui;
 
 public interface UserIO {
 

@@ -1,11 +1,13 @@
-package service;
+package vending.service;
 
-import dao.VendingMachineAuditDao;
-import dao.VendingMachineChangeDao;
-import dao.VendingMachineItemDao;
-import dao.VendingMachinePersistenceException;
-import dto.Coins;
-import dto.Item;
+import vending.dao.VendingMachineAuditDao;
+import vending.dao.VendingMachineChangeDao;
+import vending.dao.VendingMachineItemDao;
+import vending.dao.VendingMachinePersistenceException;
+import vending.dto.Coins;
+import vending.dto.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class VendingMachineServiceLayerImpl implements VendingMachineServiceLayer {
 
     private final VendingMachineItemDao dao;
@@ -22,6 +25,7 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
     private final int SCALE = 2;
     private final RoundingMode MODE = RoundingMode.HALF_UP;
 
+    @Autowired
     public VendingMachineServiceLayerImpl(VendingMachineItemDao dao, VendingMachineAuditDao audit) {
         this.dao = dao;
         this.audit = audit;
@@ -57,6 +61,9 @@ public class VendingMachineServiceLayerImpl implements VendingMachineServiceLaye
         }
         // funds is equal to the price
         dao.decrementItemNumber(name);
+        audit.writeAuditEntry(
+            name + " purchased - price $" + price + " - funds $" + funds
+        );
         return change.getEmptyChange();
     }
 

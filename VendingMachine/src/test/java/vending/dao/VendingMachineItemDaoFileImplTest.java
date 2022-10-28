@@ -1,6 +1,9 @@
-package dao;
+package vending.dao;
 
-import dto.Item;
+import vending.dao.VendingMachineItemDao;
+import vending.dao.VendingMachineItemDaoFileImpl;
+import vending.dao.VendingMachinePersistenceException;
+import vending.dto.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

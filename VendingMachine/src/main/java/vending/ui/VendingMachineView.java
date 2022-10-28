@@ -1,16 +1,20 @@
-package ui;
+package vending.ui;
 
-import dto.Coins;
-import dto.Item;
+import vending.dto.Coins;
+import vending.dto.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class VendingMachineView {
 
     private final UserIO io;
 
+    @Autowired
     public VendingMachineView(UserIO io) {
         this.io = io;
     }

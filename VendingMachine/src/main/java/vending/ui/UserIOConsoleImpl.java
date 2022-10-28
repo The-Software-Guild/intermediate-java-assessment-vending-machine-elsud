@@ -1,7 +1,10 @@
-package ui;
+package vending.ui;
+
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class UserIOConsoleImpl implements UserIO {
     @Override
     public void print(String message) {

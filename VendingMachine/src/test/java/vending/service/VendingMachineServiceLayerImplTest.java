@@ -1,11 +1,17 @@
-package service;
+package vending.service;
 
-import dao.VendingMachineAuditDao;
-import dao.VendingMachineItemDao;
-import dao.VendingMachinePersistenceException;
-import dto.Coins;
-import dto.Item;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import vending.controller.VendingMachineController;
+import vending.dao.VendingMachineAuditDao;
+import vending.dao.VendingMachineItemDao;
+import vending.dao.VendingMachinePersistenceException;
+import vending.dto.Coins;
+import vending.dto.Item;
 import org.junit.jupiter.api.Test;
+import vending.service.InsufficientFundsException;
+import vending.service.NoItemInventoryException;
+import vending.service.VendingMachineServiceLayer;
+import vending.service.VendingMachineServiceLayerImpl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,9 +21,22 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class VendingMachineServiceLayerImplTest {
-    VendingMachineItemDao testDao = new VendingMachineItemDaoStubImpl();
-    VendingMachineAuditDao testAudit = new VendingMachineAuditDaoStubImpl();
-    VendingMachineServiceLayer service = new VendingMachineServiceLayerImpl(testDao, testAudit);
+    VendingMachineItemDao testDao;
+    VendingMachineAuditDao testAudit;
+    VendingMachineServiceLayer service;
+
+    public VendingMachineServiceLayerImplTest() {
+        AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext();
+        appContext.scan(VendingMachineAuditDaoStubImpl.class.getPackageName());
+        appContext.refresh();
+        testDao = appContext.getBean(
+                "vendingMachineItemDaoStubImpl", VendingMachineItemDaoStubImpl.class
+        );
+        testAudit = appContext.getBean(
+                "vendingMachineAuditDaoStubImpl", VendingMachineAuditDaoStubImpl.class
+        );
+        service = new VendingMachineServiceLayerImpl(testDao, testAudit);
+    }
 
     private final String FIRST_NAME = "first";
     private final String SECOND_NAME = "second";
@@ -49,8 +68,7 @@ public class VendingMachineServiceLayerImplTest {
 
     @Test
     public void testBuyItemWithExactlyRequiredFunds() throws VendingMachinePersistenceException, InsufficientFundsException {
-        Map<Coins, Integer> change = service.buyItem(SECOND_NAME, SECOND_PRICE);
-        int  numberAfter = testDao.getItem(SECOND_NAME).getNumber();
+        Map<Coins, Integer> change = service.buyItem(SECOND_NAME, SECOND_PRICE);int  numberAfter = testDao.getItem(SECOND_NAME).getNumber();
         assertEquals(SECOND_NUMBER-1, numberAfter);
         assertEquals(Optional.of(0), Optional.ofNullable(change.get(Coins.QUARTERS)));
         assertEquals(Optional.of(0), Optional.ofNullable(change.get(Coins.DIMES)));
